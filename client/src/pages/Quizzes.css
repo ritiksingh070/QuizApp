@@ -1,0 +1,45 @@
+/* src/pages/Quizzes.css */
+.quiz-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .quiz-list li {
+    border: 1px solid #ddd;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  .quiz-list button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .quiz-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .question-container {
+    margin-bottom: 1rem;
+  }
+  
+  .quiz-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .quiz-buttons button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .score-container {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
