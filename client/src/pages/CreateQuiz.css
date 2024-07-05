@@ -1,0 +1,141 @@
+.createQuizContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #d1d9e2;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 0;
+}
+
+.quiz-form {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 800px;
+  max-width: 100%;
+  animation: slideIn 0.5s ease-in-out;
+  
+
+.quiz-form h2 {
+  margin-bottom: 20px;
+  color: #4a90e2;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  /* border: 2px solid red; */
+ 
+}
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: black;
+}
+
+.quiz-form input {
+  width: calc(100% - 10px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.quiz-form input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.question {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #f4f4f9;
+  border-radius: 4px;
+  background: #f9f9f9;
+  position: relative;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.add-question,
+.submit-btn,
+.remove-question {
+  background: #4a90e2;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.add-question:hover,
+.submit-btn:hover,
+.remove-question:hover {
+  background: #357ab8;
+  transform: scale(1.02);
+}
+
+.add-question:active,
+.submit-btn:active,
+.remove-question:active {
+  transform: scale(0.98);
+}
+
+.add-question {
+  margin-bottom: 20px;
+}
+
+.remove-question {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e74c3c;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-question i {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.remove-question:hover {
+  background: #c0392b;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .quiz-form {
+    width: 80%;
+  }
+}

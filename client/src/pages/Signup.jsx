@@ -20,21 +20,27 @@ function Signup() {
   };
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Signup</button>
-    </form>
+    <div className="auth-container">
+      <form className="auth-form" onSubmit={handleSubmit}>
+      <h1>Welcome to QuizzyMind </h1>
+        <h2>Signup</h2>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="auth-input"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="auth-input"
+        />
+        <button type="submit" className="auth-button">Signup</button>
+      </form>
+    </div>
   );
 }
 

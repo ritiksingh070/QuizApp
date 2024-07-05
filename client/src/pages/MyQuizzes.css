@@ -1,0 +1,176 @@
+.my-quizzes-container {
+  padding: 20px;
+  background-color: #cbced3;
+  min-height: 90vh;
+}
+
+.quiz-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.quiz-item {
+  background-color: #ebe7e7;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quiz-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-item h2 {
+  color: #333;
+}
+
+.quiz-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.edit-button,
+.delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.edit-modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000; /* Ensure the modal overlay is above other content */
+  overflow: auto; /* Allow scrolling if modal content exceeds viewport */
+  padding-top: 20px; /* Space at the top for better visibility */
+}
+
+.edit-modal {
+  background-color: white;
+  padding: 20px;
+  width: 60%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: auto;
+  z-index: 1100; /* Ensure the modal is above the overlay */
+}
+
+.edit-modal .close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.edit-quiz-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-quiz-form h2 {
+  margin-bottom: 10px;
+}
+
+.edit-quiz-form input[type="text"],
+.edit-quiz-form input[type="number"] {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.question {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.question input {
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.remove-question {
+  /* background-color: #dc3545; */
+  color:red;
+  border: none;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.remove-question:hover {
+  background-color: #c91c2e;
+}
+
+.add-question {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.add-question:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}

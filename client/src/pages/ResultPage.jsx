@@ -1,7 +1,6 @@
-// ResultPage.jsx
-
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./ResultPage.css";
 
 const ResultPage = () => {
   const location = useLocation();
@@ -14,6 +13,7 @@ const ResultPage = () => {
   if (!selectedAnswers || !currentQuiz) {
     return <div>No data available</div>;
   }
+
   const goBackToQuiz = () => {
     navigate("/all-quizzes");
   };
@@ -39,25 +39,28 @@ const ResultPage = () => {
   }, [currentQuiz, selectedAnswers]);
 
   return (
-    <div>
-      <h1>Quiz Results</h1>
-      <h1>Quiz Name : {currentQuiz.title}</h1>
-      <h1>
-        Your Score: {score} out of {totalScore}
-      </h1>
+    <div className="result">
 
-      <table border="1">
+    
+    <div className="resultPageContainer">
+      <h1>Quiz Results</h1>
+      <h2>Quiz Name: {currentQuiz.title}</h2>
+      <h3>
+        Your Score: {score} out of {totalScore}
+      </h3>
+
+      <table className="resultTable">
         <thead>
           <tr>
             <th>Question</th>
             <th>Selected Answer</th>
             <th>Correct Answer</th>
-            <th> Scored Marks</th>
+            <th>Scored Marks</th>
           </tr>
         </thead>
         <tbody>
           {currentQuiz.questions.map((question, index) => (
-            <tr key={question._id}>
+            <tr key={index}>
               <td>{question.questionText}</td>
               <td>{selectedAnswers[index]}</td>
               <td>{question.options[question.correctAnswer - 1]}</td>
@@ -76,7 +79,10 @@ const ResultPage = () => {
         </tbody>
       </table>
 
-      <button onClick={goBackToQuiz}>Go to All Quizzes</button>
+      <button onClick={goBackToQuiz} className="goBackButton">
+        Go to All Quizzes
+      </button>
+    </div>
     </div>
   );
 };

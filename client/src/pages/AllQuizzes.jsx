@@ -1,15 +1,13 @@
-// src/pages/AllQuizzes.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Quizzes.css";
+import "./AllQuizzes.css";
 
 function AllQuizzes({ isLoggedIn }) {
   const [quizzes, setQuizzes] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-
   const [timer, setTimer] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
 
@@ -24,9 +22,7 @@ function AllQuizzes({ isLoggedIn }) {
   }, []);
 
   const startQuiz = (quiz) => {
-    console.log(quiz);
     setCurrentQuiz(quiz);
-    console.log(currentQuiz);
     setSelectedAnswers(Array(quiz.questions.length).fill(null));
     setTimer(quiz.duration * 60);
     const id = setInterval(() => {
@@ -36,12 +32,8 @@ function AllQuizzes({ isLoggedIn }) {
   };
 
   const submitQuiz = () => {
-    
     navigate("/result", { state: { selectedAnswers, currentQuiz } });
     clearInterval(intervalId);
-    // console.log(`current + ${currentQuiz}`)
-
-    // setCurrentQuiz(null);
   };
 
   const handleAnswerSelect = (index) => (e) => {
@@ -51,20 +43,21 @@ function AllQuizzes({ isLoggedIn }) {
   };
 
   return (
-    <div>
+    <div className="all-quizzes-container">
       {currentQuiz ? (
         <div className="quiz-container">
           <h1>{currentQuiz.title}</h1>
-          <p>
-            Time remaining: {Math.floor(timer / 60)}:
-            {("0" + (timer % 60)).slice(-2)}
-          </p>
+          <div className="timer-container">
+            <p className="timer">
+              Time remaining: {Math.floor(timer / 60)}:
+              {("0" + (timer % 60)).slice(-2)}
+            </p>
+          </div>
           <div className="question-container">
             <h2>{currentQuiz.questions[currentQuestionIndex].questionText}</h2>
-
             {currentQuiz.questions[currentQuestionIndex].options.map(
               (option, index) => (
-                <label key={index}>
+                <label key={index} className="option-label">
                   <input
                     type="radio"
                     name="option"
@@ -80,6 +73,7 @@ function AllQuizzes({ isLoggedIn }) {
           <div className="quiz-buttons">
             {currentQuestionIndex > 0 && (
               <button
+                className="quiz-button previous"
                 onClick={() =>
                   setCurrentQuestionIndex(currentQuestionIndex - 1)
                 }
@@ -89,6 +83,7 @@ function AllQuizzes({ isLoggedIn }) {
             )}
             {currentQuestionIndex < currentQuiz.questions.length - 1 && (
               <button
+                className="quiz-button next"
                 onClick={() =>
                   setCurrentQuestionIndex(currentQuestionIndex + 1)
                 }
@@ -96,21 +91,32 @@ function AllQuizzes({ isLoggedIn }) {
                 Next
               </button>
             )}
-            <button onClick={submitQuiz}>Submit</button>
+            {currentQuestionIndex === currentQuiz.questions.length - 1 && (
+              <button className="quiz-button submit" onClick={submitQuiz}>
+                Submit
+              </button>
+            )}
           </div>
         </div>
       ) : (
-        <div>
+        <div className="all-quizzes">
           <h1>All Quizzes</h1>
           <ul className="quiz-list">
             {quizzes.map((quiz) => (
-              <li key={quiz._id}>
-                <h2>{quiz.title}</h2>
-                <p>Created by: {quiz.creator.username}</p>
-                {isLoggedIn && (
-                  <button onClick={() => startQuiz(quiz)}>Start Quiz</button>
-                )}
-              </li>
+              <div key={quiz._id} className="quizCard">
+                <li className="quiz-item1">
+                  <h2>{quiz.title}</h2>
+                  <p>Created by: {quiz.creator.username}</p>
+                  {isLoggedIn && (
+                    <button
+                      className="start-quiz-button"
+                      onClick={() => startQuiz(quiz)}
+                    >
+                      Start Quiz
+                    </button>
+                  )}
+                </li>
+              </div>
             ))}
           </ul>
         </div>

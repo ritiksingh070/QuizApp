@@ -1,0 +1,70 @@
+/* src/pages/InfoPage.css */
+.info-page {
+    /* border: 2px solid black; */
+    display: flex;
+    width: 80%;
+    height: 100vh;
+    margin:  auto;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #f5f7fa; */
+  }
+  
+  .left-side, .right-side {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .left-side h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .left-side p {
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .info-button {
+    width: fit-content;
+    padding: 10px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .info-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .info-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .info-page {
+      flex-direction: column-reverse;
+    }
+    
+    .left-side, .right-side {
+      min-width: 100%;
+      text-align: center;
+    }
+  }
+  

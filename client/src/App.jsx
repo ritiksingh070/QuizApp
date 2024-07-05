@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -11,6 +11,7 @@ import MyQuizzes from "./pages/MyQuizzes";
 import ResultPage from "./pages/ResultPage";
 import "./App.css";
 function App() {
+  
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   const handleLogin = () => {
@@ -20,6 +21,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
+    window.location.href('/')
   };
 
   return (
