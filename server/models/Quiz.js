@@ -2,17 +2,24 @@
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
-  question: String,
+  questionText: String,
   options: [String],
-  answer: String,
+  correctAnswer: Number,
+  maxTime: Number,
 });
 
 const quizSchema = new mongoose.Schema({
   title: { type: String, required: true },
   questions: [questionSchema],
-  duration: { type: Number, required: true }, // duration in minutes
+  duration: { type: Number }, // duration in minutes
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  allowedAttempts: Number,
+  
 });
 
 const Quiz = mongoose.model('Quiz', quizSchema);
-module.exports = Quiz;
+module.exports = Quiz;  
+
+
+
+

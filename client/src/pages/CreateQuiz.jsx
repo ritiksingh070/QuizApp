@@ -1,75 +1,109 @@
-// src/pages/CreateQuiz.jsx
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
-function CreateQuiz() {
-  const [title, setTitle] = useState('');
-  const [questions, setQuestions] = useState([{ question: '', options: ['', '', '', ''], answer: '' }]);
-  const [duration, setDuration] = useState('');
+const CreateQuiz = () => {
+  const [quizData, setQuizData] = useState({
+    title: "",
+    questions: [
+      {
+        questionText: "",
+        options: ["", "", "", ""],
+        correctAnswer: null,
+        maxTime: null,
+      },
+    ],
+    allowedAttempts: null,
+    duration: null,
+  });
 
-  const handleQuestionChange = (index, field, value) => {
-    const newQuestions = [...questions];
-    if (field === 'options') {
-      newQuestions[index].options = value;
-    } else {
-      newQuestions[index][field] = value;
-    }
-    setQuestions(newQuestions);
+  const handleChange = (e, index, field) => {
+    const newQuestions = [...quizData.questions];
+    newQuestions[index][field] = e.target.value;
+    setQuizData({ ...quizData, questions: newQuestions });
+  };
+
+  const handleOptionChange = (e, questionIndex, optionIndex) => {
+    const newQuestions = [...quizData.questions];
+    newQuestions[questionIndex].options[optionIndex] = e.target.value;
+    setQuizData({ ...quizData, questions: newQuestions });
   };
 
   const addQuestion = () => {
-    setQuestions([...questions, { question: '', options: ['', '', '', ''], answer: '' }]);
+    setQuizData({
+      ...quizData,
+      questions: [
+        ...quizData.questions,
+        {
+          questionText: "",
+          options: ["", "", "", ""],
+          correctAnswer: 0,
+          maxTime: 0,
+        },
+      ],
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    console.log(quizData);
+    console.log(quizData.title);
+    console.log(quizData.questions);
+    console.log(quizData.allowedAttempts);
+    console.log(quizData.duration);
+    const title = quizData.title;
+    const questions = quizData.questions;
+    const allowedAttempts = quizData.allowedAttempts;
+    const duration = quizData.duration;
+    const token = localStorage.getItem("token");
     try {
       await axios.post(
-        'http://localhost:5000/api/quiz/create',
-        { title, questions, duration },
+        "http://localhost:5000/api/quiz/create",
+        { title, questions, duration, allowedAttempts },
         { headers: { Authorization: token } }
       );
-      alert('Quiz created successfully');
+      alert("Quiz created successfully");
     } catch (err) {
-      alert('Failed to create quiz');
+      alert("Failed to create quiz");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Create Quiz</h2>
       <input
         type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Quiz Title"
+        value={quizData.title}
+        onChange={(e) => setQuizData({ ...quizData, title: e.target.value })}
       />
-      {questions.map((q, index) => (
+      {quizData.questions.map((question, index) => (
         <div key={index}>
           <input
             type="text"
-            placeholder="Question"
-            value={q.question}
-            onChange={(e) => handleQuestionChange(index, 'question', e.target.value)}
+            placeholder="Question Text"
+            value={question.questionText}
+            onChange={(e) => handleChange(e, index, "questionText")}
           />
-          {q.options.map((opt, optIndex) => (
+          {question.options.map((option, optionIndex) => (
             <input
-              key={optIndex}
+              key={optionIndex}
               type="text"
-              placeholder={`Option ${optIndex + 1}`}
-              value={opt}
-              onChange={(e) => {
-                const newOptions = [...q.options];
-                newOptions[optIndex] = e.target.value;
-                handleQuestionChange(index, 'options', newOptions);
-              }}
+              placeholder={`Option ${optionIndex + 1}`}
+              value={option}
+              onChange={(e) => handleOptionChange(e, index, optionIndex)}
             />
           ))}
           <input
-            type="text"
-            placeholder="Answer"
-            value={q.answer}
-            onChange={(e) => handleQuestionChange(index, 'answer', e.target.value)}
+            type="number"
+            placeholder="Correct Answer (0-3)"
+            value={question.correctAnswer}
+            onChange={(e) => handleChange(e, index, "correctAnswer")}
+          />
+          <input
+            type="number"
+            placeholder="Max Time (in seconds)"
+            value={question.maxTime}
+            onChange={(e) => handleChange(e, index, "maxTime")}
           />
         </div>
       ))}
@@ -78,13 +112,22 @@ function CreateQuiz() {
       </button>
       <input
         type="number"
-        placeholder="Duration (minutes)"
-        value={duration}
-        onChange={(e) => setDuration(e.target.value)}
+        placeholder="Allowed Attempts"
+        value={quizData.allowedAttempts}
+        onChange={(e) =>
+          setQuizData({ ...quizData, allowedAttempts: e.target.value })
+        }
+      />
+      <input
+        type="number"
+        placeholder="Duration (in minutes)"
+        value={quizData.duration}
+        onChange={(e) => setQuizData({ ...quizData, duration: e.target.value })}
       />
       <button type="submit">Create Quiz</button>
     </form>
   );
-}
+};
 
 export default CreateQuiz;
+
