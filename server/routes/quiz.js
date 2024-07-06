@@ -4,11 +4,11 @@ const Quiz = require("../models/Quiz");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
-
+require('dotenv').config();
 const authenticate = (req, res, next) => {
   const token = req.headers["authorization"];
   if (!token) return res.status(401).json({ error: "Access denied" });
-  jwt.verify(token, "secret", (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return res.status(401).json({ error: "Invalid token" });
     req.user = user;
     next();
