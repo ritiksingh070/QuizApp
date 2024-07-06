@@ -59,7 +59,7 @@ const CreateQuiz = () => {
     const token = localStorage.getItem("token");
     try {
       await axios.post(
-        "http://localhost:5000/api/quiz/create",
+        "https://quizapp-r5ho.onrender.com/api/quiz/create",
         { title, questions, duration, allowedAttempts },
         { headers: { Authorization: token } }
       );

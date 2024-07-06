@@ -11,7 +11,7 @@ function MyQuizzes() {
     const fetchQuizzes = async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await axios.get("http://localhost:5000/api/quiz/my-quizzes", {
+        const res = await axios.get("https://quizapp-r5ho.onrender.com/api/quiz/my-quizzes", {
           headers: { Authorization: token },
         });
         setQuizzes(res.data);
@@ -25,7 +25,7 @@ function MyQuizzes() {
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:5000/api/quiz/delete/${id}`, {
+      await axios.delete(`https://quizapp-r5ho.onrender.com/api/quiz/delete/${id}`, {
         headers: { Authorization: token },
       });
       setQuizzes(quizzes.filter((quiz) => quiz._id !== id));
@@ -40,7 +40,7 @@ function MyQuizzes() {
     const { _id, title, questions, duration, allowedAttempts } = editQuiz;
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/quiz/edit/${_id}`,
+        `https://quizapp-r5ho.onrender.com/api/quiz/edit/${_id}`,
         { title, questions, duration, allowedAttempts },
         { headers: { Authorization: token } }
       );

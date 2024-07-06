@@ -12,7 +12,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/signup', { username, password });
+      await axios.post('https://quizapp-r5ho.onrender.com/api/auth/signup', { username, password });
       navigate('/login');
     } catch (err) {
       alert('Username already exists');

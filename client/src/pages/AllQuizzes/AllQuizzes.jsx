@@ -15,7 +15,7 @@ function AllQuizzes({ isLoggedIn }) {
 
   useEffect(() => {
     const fetchQuizzes = async () => {
-      const res = await axios.get("http://localhost:5000/api/quiz/all");
+      const res = await axios.get("https://quizapp-r5ho.onrender.com/api/quiz/all");
       setQuizzes(res.data);
     };
     fetchQuizzes();
