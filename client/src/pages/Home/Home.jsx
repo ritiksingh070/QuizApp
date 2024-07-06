@@ -3,7 +3,7 @@ import './Home.css';
 
 const Home = () => {
   const getStarted = ()=>{
-    window.location.href = '/all-quizzes';
+    window.location.href('/all-quizzes');
   }
   return (
     <div className="home-container">
