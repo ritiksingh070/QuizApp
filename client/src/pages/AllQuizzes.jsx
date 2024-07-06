@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AllQuizzes.css";
@@ -22,13 +22,17 @@ function AllQuizzes({ isLoggedIn }) {
   }, []);
 
   const startQuiz = (quiz) => {
-    setCurrentQuiz(quiz);
-    setSelectedAnswers(Array(quiz.questions.length).fill(null));
-    setTimer(quiz.duration * 60);
-    const id = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    }, 1000);
-    setIntervalId(id);
+    if (isLoggedIn) {
+      setCurrentQuiz(quiz);
+      setSelectedAnswers(Array(quiz.questions.length).fill(null));
+      setTimer(quiz.duration * 60);
+      const id = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      setIntervalId(id);
+    } else {
+      navigate("/login"); // Navigate to login page if not logged in
+    }
   };
 
   const submitQuiz = () => {
@@ -107,14 +111,12 @@ function AllQuizzes({ isLoggedIn }) {
                 <li className="quiz-item1">
                   <h2>{quiz.title}</h2>
                   <p>Created by: {quiz.creator.username}</p>
-                  {isLoggedIn && (
-                    <button
-                      className="start-quiz-button"
-                      onClick={() => startQuiz(quiz)}
-                    >
-                      Start Quiz
-                    </button>
-                  )}
+                  <button
+                    className="start-quiz-button"
+                    onClick={() => startQuiz(quiz)}
+                  >
+                    Start Quiz
+                  </button>
                 </li>
               </div>
             ))}

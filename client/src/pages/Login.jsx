@@ -15,7 +15,7 @@ function Login({ onLogin }) {
       const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
       localStorage.setItem('token', res.data.token);
       onLogin();
-      navigate('/');
+      navigate('/all-quizzes');
     } catch (err) {
       alert('Invalid credentials');
     }
